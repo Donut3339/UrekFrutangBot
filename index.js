@@ -2,15 +2,14 @@ const Discord = require('discord.js')
 const client = new Discord.Client()
 
 const command = require('./command')
-const prefix = process.env.PREFIX
+const config = require('./config.json')
+const prefix = config.prefix
 const token = process.env.TOKEN
 
 const pm = require('./private-message')
 
 client.on('ready', () => {
     console.log('The client is ready!')
-    console.log('nibba')
-    console.log(prefix)
 
     command(client, 'getrole', (message) => {
         if (message.member.roles.cache.some(r => r.name === "staff")) {
