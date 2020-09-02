@@ -9,6 +9,7 @@ const pm = require('./private-message')
 
 client.on('ready', () => {
     console.log('The client is ready!')
+    console.log('nibba')
 
     command(client, 'getrole', (message) => {
         if (message.member.roles.cache.some(r => r.name === "staff")) {
