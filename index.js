@@ -47,7 +47,7 @@ client.on('ready', () => {
     })
 
     command(client, 'setstatus', (message) => {
-        if (message.member.hasPermission('ADMINISTRATOR')) {
+        if (message.member.hasPermission({checkAdmin: true, checkOwner: true})) {
             const content = message.content.replace(`${prefix}setstatus `, '')
             client.user.setPresence({
                 activity: {
@@ -55,6 +55,19 @@ client.on('ready', () => {
                     type: 0,
                 },
             });
+            message.author.lastMessage.delete({ timeout: 1000 });
+        } else {
+            const embed = new Discord.MessageEmbed()
+                .setColor('#0099ff')
+                .setAuthor(message.author.tag, message.author.avatarURL().toString())
+                .setDescription("Sorry, you can't use this commands")
+                .setTimestamp()
+            message.channel.send(embed)
+                .then(msg => {
+                    msg.delete({ timeout: 1000 })
+                })
+            message.author.lastMessage.delete({ timeout: 1000 });
+            return;
         }
     })
 
@@ -68,7 +81,7 @@ client.on('ready', () => {
             .setTitle('Commands')
             .addFields(
                 { name: 'General', value: '`getrole`, `help`'},
-                { name: 'Staff', value: '`cc / clearchat`, `setstatus`'},
+                { name: 'Staff', value: '`cc`, `clearchat`, `setstatus`, `kick`, `ban`'},
             )
             .setTimestamp()
         message.author.send(helpEmbed);
