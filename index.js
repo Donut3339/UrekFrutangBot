@@ -1,8 +1,9 @@
 const Discord = require('discord.js')
 const client = new Discord.Client()
 
-const config = require('./config.json')
 const command = require('./command')
+const prefix = process.env.PREFIX
+const token = process.env.TOKEN
 
 const pm = require('./private-message')
 
@@ -46,7 +47,7 @@ client.on('ready', () => {
 
     command(client, 'setstatus', (message) => {
         if (message.member.hasPermission('ADMINISTRATOR')) {
-            const content = message.content.replace(`${config.prefix}setstatus `, '')
+            const content = message.content.replace(`${prefix}setstatus `, '')
             client.user.setPresence({
                 activity: {
                     name: content,
@@ -94,4 +95,4 @@ client.on('message', message => {
     if (!message.guild) return;
 })
 
-client.login(config.token)
+client.login(token)
