@@ -10,6 +10,7 @@ const pm = require('./private-message')
 
 client.on('ready', () => {
     console.log('The client is ready!')
+    client.user.setActivity('Need Help? just do -help', { type: 'LISTENING' });
 
     command(client, 'getrole', (message) => {
         if (message.member.roles.cache.some(r => r.name === "staff")) {
