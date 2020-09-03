@@ -264,10 +264,7 @@ client.on('ready', () => {
     })
 
     command(client, 'verify', (message) => {
-        let verifych = message.guild.channels.cache.find(channel => channel.name === "verify");
-        //console.log(verifych)
-
-        if (!verifych.type === 'text' && verifych) {
+        if (!message.channel.id === '750884060464677068') {
             const embed = new Discord.MessageEmbed()
                 .setColor('#0099ff')
                 .setAuthor(message.author.tag, message.author.avatarURL().toString())
