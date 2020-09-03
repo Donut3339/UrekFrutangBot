@@ -255,7 +255,7 @@ client.on('ready', () => {
             .catch(console.error);
     })
 
-    command(client, ['lock', 'lockchannel'], (mesage) => {
+    command(client, ['lock', 'lockchannel'], (message) => {
         let {id} = message.guild.defaultRole, // get the ID of defaultRole
         ow = message.channel.permissionOverwrites.get(id); // get the permissionOverwrites fro that role
 
