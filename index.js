@@ -94,7 +94,7 @@ client.on('ready', () => {
             .setTitle('Commands')
             .addFields(
                 { name: 'General', value: '`getrole`, `help`'},
-                { name: 'Staff', value: '`cc`, `clearchat`, `setstatus`, `kick`, `ban`'},
+                { name: 'Staff', value: '`cc`, `clearchat`, `setstatus`, `kick`, `ban`, `lock / lockchannel`, `unlock / unlockchannel`'},
             )
             .setTimestamp()
         message.author.send(helpEmbed);
@@ -170,7 +170,7 @@ client.on('ready', () => {
             const embed = new Discord.MessageEmbed()
                 .setColor('#0099ff')
                 .setAuthor(message.author.tag, message.author.avatarURL().toString())
-                .setDescription(":cry: i can't kick this user.")
+                .setDescription(":cry: User too strong. i can't kick him")
                 .setTimestamp()
             message.channel.send(embed)
                 .then(msg => {
@@ -254,7 +254,7 @@ client.on('ready', () => {
             const embed = new Discord.MessageEmbed()
                 .setColor('#0099ff')
                 .setAuthor(message.author.tag, message.author.avatarURL().toString())
-                .setDescription(":cry: i can't ban this user.")
+                .setDescription(":cry: User too strong. i can't ban him")
                 .setTimestamp()
             message.channel.send(embed)
                 .then(msg => {
@@ -269,11 +269,11 @@ client.on('ready', () => {
     })
 
     command(client, ['lock', 'lockchannel'], (message) => {
-        
+        message.reply('command not doned. soon to working on it')
     })
 
     command(client, ['unlock', 'unlockchannel'], (message) => {
-        
+        message.reply('command not doned. soon to working on it')
     })
 
     command(client, 'verify', (message) => {
