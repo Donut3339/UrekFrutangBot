@@ -110,7 +110,7 @@ client.on('ready', () => {
             .setColor('#0099ff')
             .addFields(
                 { name: 'Speed Run Simulator', value: '```loadstring(game:HttpGet("https://raw.githubusercontent.com/Donut3339/myscriptxd/master/Speed%20Run%20Simulator.lua", true))()'},
-                { name: 'King Piece', value: '```Soon```'},
+                { name: 'King Piece', value: '```loadstring(game:HttpGet("https://raw.githubusercontent.com/Donut3339/myscriptxd/master/King%20Piece.lua", true))()```'},
             )
             .setTimestamp()
         message.author.send(scriptEmbed);
