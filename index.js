@@ -256,21 +256,8 @@ client.on('ready', () => {
     })
 
     command(client, ['lock', 'lockchannel'], (message) => {
-        message.delete().catch(O_o=>{}); 
-        if(!message.member.roles.cache.some(r=>["staff", "admin"].includes(r.name))) return message.channel.send(`Invalid Permission!`)
-
-        let channel = message.channel;
-        let roles = message.guild.roles; 
-
-        let testRole = roles.find('Verified');
-
-        channel.overwritePermissions(
-            testRole,
-            { 'SEND_MESSAGES': false },
-            'Competitive has Ended'
-        )
-        .then(console.log)
-        .catch(console.log);
+        let role = message.guild.roles.find(role => role.name === "staff");
+        if(!role) return message.reply('Sorry, you dont have permission to do this commands.')
     })
 })
 
