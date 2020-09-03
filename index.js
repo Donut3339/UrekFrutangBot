@@ -44,6 +44,18 @@ client.on('ready', () => {
             message.channel.messages.fetch().then((results) => {
                 message.channel.bulkDelete(results)
             })
+        } else {
+            const embed = new Discord.MessageEmbed()
+                .setColor('#0099ff')
+                .setAuthor(message.author.tag, message.author.avatarURL().toString())
+                .setDescription("Sorry, you don't have permission to use this commands.")
+                .setTimestamp()
+            message.channel.send(embed)
+                .then(msg => {
+                    msg.delete({ timeout: 1000 })
+                })
+            message.author.lastMessage.delete({ timeout: 1000 });
+            return;
         }
     })
 
@@ -61,7 +73,7 @@ client.on('ready', () => {
             const embed = new Discord.MessageEmbed()
                 .setColor('#0099ff')
                 .setAuthor(message.author.tag, message.author.avatarURL().toString())
-                .setDescription("Sorry, you can't use this commands")
+                .setDescription("Sorry, you don't have permission to use this commands.")
                 .setTimestamp()
             message.channel.send(embed)
                 .then(msg => {
@@ -110,12 +122,13 @@ client.on('ready', () => {
             const embed = new Discord.MessageEmbed()
                 .setColor('#0099ff')
                 .setAuthor(message.author.tag, message.author.avatarURL().toString())
-                .setDescription("Sorry, you don't have permission to doing this commands.")
+                .setDescription("Sorry, you don't have permission to use this commands.")
+                .setTimestamp()
             message.channel.send(embed)
                 .then(msg => {
-                    msg.delete({ timeout: 10000 })
+                    msg.delete({ timeout: 1000 })
                 })
-            message.author.lastMessage.delete({ timeout: 10000 });
+            message.author.lastMessage.delete({ timeout: 1000 });
             return;
         };
 
@@ -124,7 +137,7 @@ client.on('ready', () => {
             const embed = new Discord.MessageEmbed()
                 .setColor('#0099ff')
                 .setAuthor(message.author.tag, message.author.avatarURL().toString())
-                .setDescription("Invalid args, please mention the user witch you want to kick.")
+                .setDescription("Invalid args, you need to provide a valid user to ban.")
                 .addField('Example:', '```-kick @Jexytd#3339 (reason)```', true)
                 .setTimestamp()
             message.channel.send(embed)
@@ -193,7 +206,7 @@ client.on('ready', () => {
             const embed = new Discord.MessageEmbed()
                 .setColor('#0099ff')
                 .setAuthor(message.author.tag, message.author.avatarURL().toString())
-                .setDescription("Sorry, you don't have permission to doing this commands.")
+                .setDescription("Sorry, you don't have permission to use this commands.")
                 .setTimestamp()
             message.channel.send(embed)
                 .then(msg => {
@@ -208,8 +221,8 @@ client.on('ready', () => {
             const embed = new Discord.MessageEmbed()
                 .setColor('#0099ff')
                 .setAuthor(message.author.tag, message.author.avatarURL().toString())
-                .setDescription("Invalid args, please mention the user witch you want to ban.")
-                .addField('Example:', '```-ban @Jexytd#3339 (time) (reason)```', true)
+                .setDescription("Invalid args, you need to provide a valid user to kick.")
+                .addField('Example:', '```-ban @Jexytd#3339 (reason)```', true)
                 .setTimestamp()
             message.channel.send(embed)
                 .then(msg => {
@@ -264,7 +277,9 @@ client.on('ready', () => {
     })
 
     command(client, 'verify', (message) => {
-        if (!message.channel.id === '750884060464677068') {
+        const channel = message.channels.find(c => c.name === 'verify');
+        const id = channel ? channel.id : null;
+        if (!id) {
             const embed = new Discord.MessageEmbed()
                 .setColor('#0099ff')
                 .setAuthor(message.author.tag, message.author.avatarURL().toString())
