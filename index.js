@@ -280,19 +280,7 @@ client.on('ready', () => {
         let channel = message.guild.channels
         let verifych = channel.cache.some(ch => ch.name === "verify")
 
-        if (!verifych) {
-            const embed = new Discord.MessageEmbed()
-                .setColor('#0099ff')
-                .setAuthor(message.author.tag, message.author.avatarURL().toString())
-                .setDescription("Sorry, this commands only on verify channel")
-                .setTimestamp()
-            message.channel.send(embed)
-                .then(msg => {
-                    msg.delete({ timeout: 10000 })
-                })
-            message.author.lastMessage.delete({ timeout: 10000 });
-            return;
-        } else {
+        if (verifych) {
             if (message.member.roles.cache.some(r => r.name === "Verified")) {
                 const embed = new Discord.MessageEmbed()
                     .setColor('#0099ff')
@@ -317,6 +305,18 @@ client.on('ready', () => {
                     })
                 message.author.lastMessage.delete({ timeout: 1000 });
             }
+        } else {
+            const embed = new Discord.MessageEmbed()
+                .setColor('#0099ff')
+                .setAuthor(message.author.tag, message.author.avatarURL().toString())
+                .setDescription("Sorry, this commands only on verify channel")
+                .setTimestamp()
+            message.channel.send(embed)
+                .then(msg => {
+                    msg.delete({ timeout: 10000 })
+                })
+            message.author.lastMessage.delete({ timeout: 10000 });
+            return;
         }
     })
 })
