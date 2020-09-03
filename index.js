@@ -265,6 +265,7 @@ client.on('ready', () => {
 
     command(client, 'verify', (message) => {
         let verifych = message.guild.channels.cache.find(channel => channel.name === "verify");
+        console.log(verifych)
 
         if (!verifych) {
             const embed = new Discord.MessageEmbed()
