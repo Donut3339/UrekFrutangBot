@@ -256,14 +256,10 @@ client.on('ready', () => {
     })
 
     command(client, ['lock', 'lockchannel'], (message) => {
-        let {id} = message.guild.defaultRole, // get the ID of defaultRole
-        ow = message.channel.permissionOverwrites.get(id); // get the permissionOverwrites fro that role
-
-        // If the overwrites exist and SEND_MESSAGES is set to false, then it's already locked
-        if (ow && ow.SEND_MESSAGES === false) message.channel.send("The channel is already locked.");
-        else { // otherwise, lock it
-            message.channel.overwritePermissions(message.guild.defaultRole, { SEND_MESSAGES: false }, );
-            return message.channel.send(`:lock: The channel is now locked..\nUse \`k!unlock\` to end lockdown.. `);
+        if (message.member.hasPermission('MANAGE_MESSAGES')) {
+            message.reply('yes')
+        } else {
+            message.reply('no')
         }
     })
 })
