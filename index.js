@@ -269,20 +269,18 @@ client.on('ready', () => {
     })
 
     command(client, ['lock', 'lockchannel'], (message) => {
-        let channel = message.guild.channel
+        
     })
 
     command(client, ['unlock', 'unlockchannel'], (message) => {
-        let channel = message.guild.channels
-        let verifych = channel.cache.some(ch => ch.name === "verify")
-
-        if (!verifych) return message.reply('no')
+        
     })
 
     command(client, 'verify', (message) => {
-        const channel = message.channels.cache.find(c => c.name === 'verify');
-        const id = channel ? channel.id : null;
-        if (!id) {
+        let channel = message.guild.channels
+        let verifych = channel.cache.some(ch => ch.name === "verify")
+
+        if (!verifych) {
             const embed = new Discord.MessageEmbed()
                 .setColor('#0099ff')
                 .setAuthor(message.author.tag, message.author.avatarURL().toString())
