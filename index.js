@@ -262,7 +262,7 @@ client.on('ready', () => {
         // If the overwrites exist and SEND_MESSAGES is set to false, then it's already locked
         if (ow && ow.SEND_MESSAGES === false) message.channel.send("The channel is already locked.");
         else { // otherwise, lock it
-            await message.channel.overwritePermissions(message.guild.defaultRole, { SEND_MESSAGES: false }, );
+            message.channel.overwritePermissions(message.guild.defaultRole, { SEND_MESSAGES: false }, );
             return message.channel.send(`:lock: The channel is now locked..\nUse \`k!unlock\` to end lockdown.. `);
         }
     })
