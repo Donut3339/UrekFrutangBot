@@ -256,17 +256,7 @@ client.on('ready', () => {
     })
 
     command(client, ['lock', 'lockchannel'], (message) => {
-        let role = message.guild.roles.find(role => role.name === "staff");
-        if(!role) return message.reply('Sorry, you dont have permission to do this commands.')
-
-        // Getting all permissions for a member on a channel.
-        let perms = message.channel.permissionsFor(message.member);
-
-        // Checks for Manage Messages permissions.
-        let can_manage_chans = message.channel.permissionsFor(message.member).has("MANAGE_MESSAGES", false);
-
-        // View permissions as an object (useful for debugging or eval)
-        message.channel.permissionsFor(message.member).serialize(false).then(log => console.log(`nigga ${log}`))
+        
     })
 
     command(client, ['unlock', 'unlockchannel'], (message) => {
@@ -274,7 +264,21 @@ client.on('ready', () => {
     })
 
     command(client, 'verify', (message) => {
-        
+        let verifych = message.guild.channels.find(channel => channel.name === "verify");
+
+        if (!verifych) {
+            const embed = new Discord.MessageEmbed()
+                .setColor('#0099ff')
+                .setAuthor(message.author.tag, message.author.avatarURL().toString())
+                .setDescription("Sorry, this commands only on verify channel")
+                .setTimestamp()
+            message.channel.send(embed)
+                .then(msg => {
+                    msg.delete({ timeout: 10000 })
+                })
+            message.author.lastMessage.delete({ timeout: 10000 });
+            return;
+        }
     })
 })
 
