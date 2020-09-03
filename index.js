@@ -270,10 +270,12 @@ client.on('ready', () => {
 
     command(client, ['lock', 'lockchannel'], (message) => {
         message.reply('command not doned. soon to working on it')
+        return;
     })
 
     command(client, ['unlock', 'unlockchannel'], (message) => {
         message.reply('command not doned. soon to working on it')
+        return;
     })
 
     command(client, 'verify', (message) => {
