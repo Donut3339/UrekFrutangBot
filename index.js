@@ -257,7 +257,7 @@ client.on('ready', () => {
 
     command(client, ['lock', 'lockchannel'], (message) => {
         message.delete().catch(O_o=>{}); 
-        if(!message.member.roles.some(r=>["staff", "admin"].includes(r.name))) return message.channel.send(`Invalid Permission!`)
+        if(!message.member.roles.cache.some(r=>["staff", "admin"].includes(r.name))) return message.channel.send(`Invalid Permission!`)
 
         function closeDownChannel(message) {
             let channel = message.channel;
