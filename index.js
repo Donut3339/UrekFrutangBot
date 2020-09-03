@@ -256,11 +256,24 @@ client.on('ready', () => {
     })
 
     command(client, ['lock', 'lockchannel'], (message) => {
-        if (message.member.hasPermission('MANAGE_MESSAGES')) {
-            message.reply('yes')
-        } else {
-            message.reply('no')
+        message.delete().catch(O_o=>{}); 
+        if(!message.member.roles.some(r=>["staff", "admin"].includes(r.name))) return message.channel.send(`Invalid Permission!`)
+
+        function closeDownChannel(message) {
+            let channel = message.channel;
+            let roles = message.guild.roles; 
+    
+            let testRole = roles.find('Verified');
+    
+            channel.overwritePermissions(
+                testRole,
+                { 'SEND_MESSAGES': false },
+                'Competitive has Ended'
+            )
+            .then(console.log)
+            .catch(console.log);
         }
+        closeDownChannel();
     })
 })
 
