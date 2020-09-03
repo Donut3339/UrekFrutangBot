@@ -258,6 +258,23 @@ client.on('ready', () => {
     command(client, ['lock', 'lockchannel'], (message) => {
         let role = message.guild.roles.find(role => role.name === "staff");
         if(!role) return message.reply('Sorry, you dont have permission to do this commands.')
+
+        // Getting all permissions for a member on a channel.
+        let perms = message.channel.permissionsFor(message.member);
+
+        // Checks for Manage Messages permissions.
+        let can_manage_chans = message.channel.permissionsFor(message.member).has("MANAGE_MESSAGES", false);
+
+        // View permissions as an object (useful for debugging or eval)
+        message.channel.permissionsFor(message.member).serialize(false).then(log => console.log(`nigga ${log}`))
+    })
+
+    command(client, ['unlock', 'unlockchannel'], (message) => {
+
+    })
+
+    command(client, 'verify', (message) => {
+        
     })
 })
 
