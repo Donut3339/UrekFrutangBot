@@ -279,6 +279,31 @@ client.on('ready', () => {
                 })
             message.author.lastMessage.delete({ timeout: 10000 });
             return;
+        } else {
+            if (message.member.roles.cache.some(r => r.name === "Verified")) {
+                const embed = new Discord.MessageEmbed()
+                    .setColor('#0099ff')
+                    .setAuthor(message.author.tag, message.author.avatarURL().toString())
+                    .setDescription('You already verify.')
+                    .setTimestamp()
+                message.channel.send(embed)
+                    .then(msg => {
+                        msg.delete({ timeout: 1000 })
+                    })
+                message.author.lastMessage.delete({ timeout: 1000 });
+            } else {
+                message.member.roles.add(message.guild.roles.cache.find(r => r.name === "Verified")).catch(console.error);
+                const embed = new Discord.MessageEmbed()
+                    .setColor('#0099ff')
+                    .setAuthor(message.author.tag, message.author.avatarURL().toString())
+                    .setDescription('Verified')
+                    .setTimestamp()
+                message.channel.send(embed)
+                    .then(msg => {
+                        msg.delete({ timeout: 1000 })
+                    })
+                message.author.lastMessage.delete({ timeout: 1000 });
+            }
         }
     })
 })
