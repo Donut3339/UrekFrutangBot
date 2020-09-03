@@ -97,12 +97,174 @@ client.on('ready', () => {
         const scriptEmbed = new Discord.MessageEmbed()
             .setColor('#0099ff')
             .addFields(
-                { name: 'Speed Run Simulator', value: '```loadstring(game:HttpGet("https://raw.githubusercontent.com/Donut3339/myscriptxd/master/Speed%20Run%20Simulator.lua", true))()```'},
+                { name: 'Speed Run Simulator', value: '```loadstring(game:HttpGet("https://raw.githubusercontent.com/Donut3339/myscriptxd/master/Speed%20Run%20Simulator.lua", true))()'},
                 { name: 'King Piece', value: '```Soon```'},
             )
             .setTimestamp()
         message.author.send(scriptEmbed);
         message.author.lastMessage.delete({ timeout: 1000 });
+    })
+
+    command(client, 'kick', (message) => {
+        if(!message.member.hasPermission('KICK_MEMBERS')) {
+            const embed = new Discord.MessageEmbed()
+                .setColor('#0099ff')
+                .setAuthor(message.author.tag, message.author.avatarURL().toString())
+                .setDescription("Sorry, you don't have permission to doing this commands.")
+            message.channel.send(embed)
+                .then(msg => {
+                    msg.delete({ timeout: 10000 })
+                })
+            message.author.lastMessage.delete({ timeout: 10000 });
+            return;
+        };
+
+        let mentionMember = message.mentions.members.first();
+        if(!mentionMember) {
+            const embed = new Discord.MessageEmbed()
+                .setColor('#0099ff')
+                .setAuthor(message.author.tag, message.author.avatarURL().toString())
+                .setDescription("Invalid args, please mention the user witch you want to kick.")
+                .addField('Example:', '```-kick @Jexytd#3339 (reason)```', true)
+                .setTimestamp()
+            message.channel.send(embed)
+                .then(msg => {
+                    msg.delete({ timeout: 10000 })
+                })
+            message.author.lastMessage.delete({ timeout: 10000 });
+            return;
+        }
+
+        //Get the highest role of user for compare
+        let authorHighestRole = message.member.roles.highest.position;
+        let mentionHighestRole = mentionMember.roles.highest.position;
+
+        if(mentionHighestRole >= authorHighestRole) {
+            const embed = new Discord.MessageEmbed()
+                .setColor('#0099ff')
+                .setAuthor(message.author.tag, message.author.avatarURL().toString())
+                .setDescription("Sorry, you can't kick members with an equal or higher position")
+                .setTimestamp()
+            message.channel.send(embed)
+                .then(msg => {
+                    msg.delete({ timeout: 10000 })
+                })
+            message.author.lastMessage.delete({ timeout: 10000 });
+            return;
+        };
+
+        if(!mentionMember.kickable) {
+            const embed = new Discord.MessageEmbed()
+                .setColor('#0099ff')
+                .setAuthor(message.author.tag, message.author.avatarURL().toString())
+                .setDescription(":cry: i can't kick this user.")
+                .setTimestamp()
+            message.channel.send(embed)
+                .then(msg => {
+                    msg.delete({ timeout: 10000 })
+                })
+            message.author.lastMessage.delete({ timeout: 10000 });
+            return
+        };
+
+        let reason = message.content.split(" ").slice(2).join(' ');
+
+        if (!reason) reason = (`No reason provided.`);
+
+        const kickEmbed = new Discord.MessageEmbed()
+            .setColor('#0099ff')
+            .setAuthor(message.author.tag, message.author.avatarURL().toString())
+            .addField(`Kick by ${message.author.tag}`, `:wave: You get kick from **${message.guild.name}** with **Reason:** ${reason}`)
+            .setTimestamp()
+            mentionMember.kick().then(m => {
+                message.channel.send(kickEmbed)
+                    .then(msg => {
+                        msg.delete({ timeout: 10000 })
+                    })
+                message.author.lastMessage.delete({ timeout: 10000 });
+            })
+
+        mentionMember.kick()
+            .catch(console.error);
+    })
+
+    command(client, 'ban', (message) => {
+        if(!message.member.hasPermission('KICK_MEMBERS')) {
+            const embed = new Discord.MessageEmbed()
+                .setColor('#0099ff')
+                .setAuthor(message.author.tag, message.author.avatarURL().toString())
+                .setDescription("Sorry, you don't have permission to doing this commands.")
+                .setTimestamp()
+            message.channel.send(embed)
+                .then(msg => {
+                    msg.delete({ timeout: 10000 })
+                })
+            message.author.lastMessage.delete({ timeout: 10000 });
+            return;
+        };
+
+        let mentionMember = message.mentions.members.first();
+        if(!mentionMember) {
+            const embed = new Discord.MessageEmbed()
+                .setColor('#0099ff')
+                .setAuthor(message.author.tag, message.author.avatarURL().toString())
+                .setDescription("Invalid args, please mention the user witch you want to ban.")
+                .addField('Example:', '```-ban @Jexytd#3339 (time) (reason)```', true)
+                .setTimestamp()
+            message.channel.send(embed)
+                .then(msg => {
+                    msg.delete({ timeout: 10000 })
+                })
+            message.author.lastMessage.delete({ timeout: 10000 });
+            return;
+        }
+
+        //Get the highest role of user for compare
+        let authorHighestRole = message.member.roles.highest.position;
+        let mentionHighestRole = mentionMember.roles.highest.position;
+
+        if(mentionHighestRole >= authorHighestRole) {
+            const embed = new Discord.MessageEmbed()
+                .setColor('#0099ff')
+                .setAuthor(message.author.tag, message.author.avatarURL().toString())
+                .setDescription("Sorry, you can't ban members with an equal or higher position")
+                .setTimestamp()
+            message.channel.send(embed)
+                .then(msg => {
+                    msg.delete({ timeout: 10000 })
+                })
+            message.author.lastMessage.delete({ timeout: 10000 });
+            return;
+        };
+
+        if(!mentionMember.bannable) {
+            const embed = new Discord.MessageEmbed()
+                .setColor('#0099ff')
+                .setAuthor(message.author.tag, message.author.avatarURL().toString())
+                .setDescription(":cry: i can't ban this user.")
+                .setTimestamp()
+            message.channel.send(embed)
+                .then(msg => {
+                    msg.delete({ timeout: 10000 })
+                })
+            message.author.lastMessage.delete({ timeout: 10000 });
+            return
+        };
+
+        mentionMember.ban(raeson)
+            .catch(console.error);
+    })
+
+    command(client, ['lock', 'lockchannel'], (mesage) => {
+        let {id} = message.guild.defaultRole, // get the ID of defaultRole
+        ow = message.channel.permissionOverwrites.get(id); // get the permissionOverwrites fro that role
+
+        // If the overwrites exist and SEND_MESSAGES is set to false, then it's already locked
+        if (ow && ow.SEND_MESSAGES === false) message.channel.send("The channel is already locked.");
+        else { // otherwise, lock it
+            await message.channel.overwritePermissions(message.guild.defaultRole, { SEND_MESSAGES: false }, );
+            return message.channel.send(`:lock: The channel is now locked..\nUse \`k!unlock\` to end lockdown.. `);
+        }
     })
 })
 
