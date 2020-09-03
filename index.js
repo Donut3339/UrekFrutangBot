@@ -277,7 +277,7 @@ client.on('ready', () => {
     })
 
     command(client, 'verify', (message) => {
-        const channel = message.channels.find(c => c.name === 'verify');
+        const channel = message.channels.cache.find(c => c.name === 'verify');
         const id = channel ? channel.id : null;
         if (!id) {
             const embed = new Discord.MessageEmbed()
