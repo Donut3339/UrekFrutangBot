@@ -259,21 +259,18 @@ client.on('ready', () => {
         message.delete().catch(O_o=>{}); 
         if(!message.member.roles.cache.some(r=>["staff", "admin"].includes(r.name))) return message.channel.send(`Invalid Permission!`)
 
-        function closeDownChannel(message) {
-            let channel = message.channel;
-            let roles = message.guild.roles; 
-    
-            let testRole = roles.find('Verified');
-    
-            channel.overwritePermissions(
-                testRole,
-                { 'SEND_MESSAGES': false },
-                'Competitive has Ended'
-            )
-            .then(console.log)
-            .catch(console.log);
-        }
-        closeDownChannel();
+        let channel = message.channel;
+        let roles = message.guild.roles; 
+
+        let testRole = roles.find('Verified');
+
+        channel.overwritePermissions(
+            testRole,
+            { 'SEND_MESSAGES': false },
+            'Competitive has Ended'
+        )
+        .then(console.log)
+        .catch(console.log);
     })
 })
 
