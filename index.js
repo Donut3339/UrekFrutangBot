@@ -11,7 +11,7 @@ const roleClaim = require('./role-claim')
 client.on('ready', () => {
     console.log('The client is ready!')
     client.user.setActivity(`Help do -help`, { type: 'PLAYING' });
-    //roleClaim(client)
+    roleClaim(client)
 
     command(client, 'test', (message, text) => {
         message.react(text)
