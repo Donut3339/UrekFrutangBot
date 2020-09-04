@@ -347,6 +347,6 @@ client.on("messageReactionAdd", (reaction, user) => {
                 );
             })
     }
-},
+}
 
 client.login(token)
