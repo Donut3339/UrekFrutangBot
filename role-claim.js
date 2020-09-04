@@ -10,17 +10,15 @@ module.exports = (client) => {
         fire: "Notifications",
     }
 
-    if (emojis.includes('>')) {
-        emojis = emojis.substring(0, -1)
-    }
-    
     const reactions = []
 
     let emojiText = 'Add a reaction to claim a role\n\n'
     for (const key in emojis) {
         const emoji = getEmoji(key)
         reactions.push(emoji)
-        console.log(emoji)
+        if (emoji.includes('>')) {
+            emoji = emoji.substring(0, -1)
+        }
         const role = emojis[key]
         emojiText += `${emoji} = ${role}\n`
     }
