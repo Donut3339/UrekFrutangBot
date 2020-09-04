@@ -10,6 +10,7 @@ client.on('ready', () => {
     console.log('The client is ready!')
     client.user.setActivity(`Help do -help`, { type: 'PLAYING' });
 
+    /*
     command(client, 'getrole', (message) => {
         if (message.member.roles.cache.some(r => r.name === "staff")) {
             const embed = new Discord.MessageEmbed()
@@ -35,7 +36,7 @@ client.on('ready', () => {
                 })
             message.author.lastMessage.delete({ timeout: 1000 });
         }
-    })
+    })*/
 
     command(client, ['cc', 'clearchat'], (message) => {
         if (message.member.hasPermission('MANAGE_MESSAGES')) {
@@ -82,7 +83,7 @@ client.on('ready', () => {
         }
     })
 
-    command(client, ['help', 'command', 'commands'], (message) => {
+    command(client, 'help', (message) => {
         message.reply('Check your dms!')
             .then(msg => {
                 msg.delete({ timeout: 10000 })
@@ -266,16 +267,6 @@ client.on('ready', () => {
             .catch(console.error);
     })
 
-    command(client, ['lock', 'lockchannel'], (message) => {
-        message.reply('command not doned. soon to working on it')
-        return;
-    })
-
-    command(client, ['unlock', 'unlockchannel'], (message) => {
-        message.reply('command not doned. soon to working on it')
-        return;
-    })
-
     command(client, 'verify', (message) => {
         let channel = message.guild.channels
         let verifych = channel.cache.some(ch => ch.name === "verify")
@@ -323,36 +314,8 @@ client.on('ready', () => {
 
 client.on('message', message => {
     if (!message.guild) return;
-})
 
-client.on("messageReactionAdd", (reaction, user) => {
-    if(reaction.emoji.name == "🔥" && reaction.message.id === message_id) {
-        guild.fetchMember(user) // fetch the user that reacted
-            .then((member) => {
-                let role = (member.guild.roles.find(role => role.name === "Notification"));
-                member.addRole(role)
-                .then(() => 
-                {
-                    console.log(`Added the role to ${member.displayName}`);
-                }
-                );
-            })
-    }
-})
-
-client.on("messageReactionRemove", (reaction, user) => {
-    if(reaction.emoji.name == "🔥" && reaction.message.id === message_id) {
-        guild.fetchMember(user) // fetch the user that reacted
-            .then((member) => {
-                let role = (member.guild.roles.find(role => role.name === "Notification"));
-                member.removeRole(role)
-                .then(() => 
-                {
-                    console.log(`Added the role to ${member.displayName}`);
-                }
-                );
-            })
-    }
+    if (!command(client, ['cc', 'clearchat', 'setstatus', 'getscript', 'kick', 'ban'])) return message.reply("Command doesn't exist.");
 })
 
 client.login(token)
