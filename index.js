@@ -13,8 +13,8 @@ client.on('ready', () => {
     client.user.setActivity(`Help do -help`, { type: 'PLAYING' });
     //roleClaim(client)
 
-    command(client, 'test', (message) => {
-        console.log(message)
+    command(client, 'test', (message, text) => {
+        message.react(text)
     })
 
     command(client, 'getrole', (message) => {
