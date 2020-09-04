@@ -314,8 +314,6 @@ client.on('ready', () => {
 
 client.on('message', message => {
     if (!message.guild) return;
-
-    if (!command(client, ['cc', 'clearchat', 'setstatus', 'getscript', 'kick', 'ban'])) return message.reply("Command doesn't exist.");
 })
 
 client.login(token)
