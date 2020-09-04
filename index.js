@@ -136,7 +136,7 @@ client.on('ready', () => {
             const embed = new Discord.MessageEmbed()
                 .setColor('#0099ff')
                 .setAuthor(message.author.tag, message.author.avatarURL().toString())
-                .setDescription("Invalid args, you need to provide a valid user to ban.")
+                .setDescription("Invalid args, you need to provide a valid user to kick.")
                 .addField('Example:', '```-kick @Jexytd#3339 (reason)```', true)
                 .setTimestamp()
             message.channel.send(embed)
