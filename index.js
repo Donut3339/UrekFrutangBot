@@ -11,7 +11,11 @@ const roleClaim = require('./role-claim')
 client.on('ready', () => {
     console.log('The client is ready!')
     client.user.setActivity(`Help do -help`, { type: 'PLAYING' });
-    roleClaim(client)
+    //roleClaim(client)
+
+    command(client, 'test', (message) => {
+        console.log(message)
+    })
 
     command(client, 'getrole', (message) => {
         if (message.member.roles.cache.some(r => r.name === "staff")) {
