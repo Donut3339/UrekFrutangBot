@@ -327,4 +327,14 @@ client.on('message', message => {
     if (!message.guild) return;
 })
 
+client.on('messageReactionAdd', (reaction, user) => {
+    if (reaction.message.channel.id === '751293042643697675') {
+      if (reaction.emoji.name === "o") {
+        const guildMember = reaction.message.guild.members.get(user.id);
+        const role = reaction.message.guild.roles.get('751293521989730425');
+        guildMember.addRole(role);
+      }
+    }
+  });
+
 client.login(token)
