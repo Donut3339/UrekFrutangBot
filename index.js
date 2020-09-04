@@ -6,12 +6,12 @@ const config = require('./config.json')
 const prefix = config.prefix
 const token = process.env.TOKEN
 
-const reactRole = require('./getrole')
+const roleClaim = require('./role-claim')
 
 client.on('ready', () => {
     console.log('The client is ready!')
     client.user.setActivity(`Help do -help`, { type: 'PLAYING' });
-    reacRole(client, [':o:'], ['Notification'])
+    roleClaim(client)
 
     command(client, 'getrole', (message) => {
         if (message.member.roles.cache.some(r => r.name === "staff")) {
