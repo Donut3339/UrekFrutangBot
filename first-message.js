@@ -10,7 +10,7 @@ module.exports = async (client, id, text, reactions = []) => {
   // Get the channel
   const channel = client.channels.cache.get(id)
   // Get the message
-  const message = channel.messages.cache.get(messageId)
+  const message = channel.messages.cache.get(text)
   // Apply the new text
   message.edit(text)
 
