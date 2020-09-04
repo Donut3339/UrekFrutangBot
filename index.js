@@ -6,8 +6,6 @@ const config = require('./config.json')
 const prefix = config.prefix
 const token = process.env.TOKEN
 
-const roleClaim = require('./role-claim')
-
 client.on('ready', () => {
     console.log('The client is ready!')
     client.user.setActivity(`Help do -help`, { type: 'PLAYING' });
