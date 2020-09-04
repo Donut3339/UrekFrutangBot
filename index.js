@@ -10,13 +10,6 @@ client.on('ready', () => {
     console.log('The client is ready!')
     client.user.setActivity(`Help do -help`, { type: 'PLAYING' });
 
-    client.channels.get(751293042643697675).fetchMessage(751326190920269826).then(m => {
-        console.log("Cached reaction message.");
-    }).catch(e => {
-        console.error("Error loading message.");
-        console.error(e);
-    });
-
     command(client, 'getrole', (message) => {
         if (message.member.roles.cache.some(r => r.name === "staff")) {
             const embed = new Discord.MessageEmbed()
@@ -345,6 +338,21 @@ client.on("messageReactionAdd", (reaction, user) => {
                 );
             })
     }
-}),
+})
+
+client.on("messageReactionRemove", (reaction, user) => {
+    if(reaction.emoji.name == "🔥" && reaction.message.id === message_id) {
+        guild.fetchMember(user) // fetch the user that reacted
+            .then((member) => {
+                let role = (member.guild.roles.find(role => role.name === "Notification"));
+                member.removeRole(role)
+                .then(() => 
+                {
+                    console.log(`Added the role to ${member.displayName}`);
+                }
+                );
+            })
+    }
+})
 
 client.login(token)
