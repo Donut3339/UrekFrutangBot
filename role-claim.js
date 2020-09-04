@@ -16,14 +16,12 @@ module.exports = (client) => {
     for (const key in emojis) {
         const emoji = getEmoji(key)
         reactions.push(emoji)
-        if (emoji.includes('>')) {
-            emoji = emoji.substring(0, -1)
-        }
         const role = emojis[key]
         emojiText += `${emoji} = ${role}\n`
     }
 
     firstMessage(client, channelId, emojiText, reactions)
+    editMessage(client, 'enter your channel ID here', 'enter your message ID here', 'hello world', ['emoji here'])
 
     const handleReaction = (reaction, user, add) => {
         if (user.id === '750536549636243626') {
