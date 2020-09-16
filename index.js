@@ -100,7 +100,7 @@ client.on('ready', () => {
         message.author.lastMessage.delete({ timeout: 1000 });
     })
 
-    command(client, 'getscript', (message) => {
+    command(client, ['getscript', 'getscripts'], (message) => {
         message.reply('Check your dms!')
             .then(msg => {
                 msg.delete({ timeout: 10000 })
@@ -110,7 +110,8 @@ client.on('ready', () => {
             .addFields(
                 { name: 'Speed Run Simulator', value: '```loadstring(game:HttpGet("https://raw.githubusercontent.com/Donut3339/myscriptxd/master/Speed%20Run%20Simulator.lua", true))()```'},
                 { name: 'King Piece', value: '```loadstring(game:HttpGet("https://raw.githubusercontent.com/Donut3339/myscriptxd/master/King%20Piece.lua", true))()```'},
-                { name: 'A Universal Time', value: '```loadstring(game:HttpGet("https://raw.githubusercontent.com/Donut3339/myscriptxd/master/A%20Universal%20Time.lua", true))()```'}
+                { name: 'A Universal Time', value: '```loadstring(game:HttpGet("https://raw.githubusercontent.com/Donut3339/myscriptxd/master/A%20Universal%20Time.lua", true))()```'},
+                { name: 'One Punch Man: Destiny', value: '```loadstring(game:HttpGet("https://raw.githubusercontent.com/Donut3339/myscriptxd/master/OPM_Destiny.lua", true))()```'}
             )
             .setTimestamp()
         message.author.send(scriptEmbed);
