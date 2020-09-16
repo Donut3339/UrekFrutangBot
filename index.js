@@ -108,10 +108,10 @@ client.on('ready', () => {
         const scriptEmbed = new Discord.MessageEmbed()
             .setColor('#0099ff')
             .addFields(
-                { name: 'Speed Run Simulator', value: '```loadstring(game:HttpGet("https://raw.githubusercontent.com/Donut3339/myscriptxd/master/Speed%20Run%20Simulator.lua", true))()```'},
-                { name: 'King Piece', value: '```loadstring(game:HttpGet("https://raw.githubusercontent.com/Donut3339/myscriptxd/master/King%20Piece.lua", true))()```'},
-                { name: 'A Universal Time', value: '```loadstring(game:HttpGet("https://raw.githubusercontent.com/Donut3339/myscriptxd/master/A%20Universal%20Time.lua", true))()```'},
-                { name: 'One Punch Man: Destiny', value: '```shared.key = "free" -- sometimes changed :]\nloadstring(game:HttpGet("https://raw.githubusercontent.com/Donut3339/myscriptxd/master/OPM_Destiny.lua", true))()```'}
+                { name: 'Speed Run Simulator', value: '```lua\nloadstring(game:HttpGet("https://raw.githubusercontent.com/Donut3339/myscriptxd/master/Speed%20Run%20Simulator.lua", true))()```'},
+                { name: 'King Piece', value: '```lua\nloadstring(game:HttpGet("https://raw.githubusercontent.com/Donut3339/myscriptxd/master/King%20Piece.lua", true))()```'},
+                { name: 'A Universal Time', value: '```lua\nloadstring(game:HttpGet("https://raw.githubusercontent.com/Donut3339/myscriptxd/master/A%20Universal%20Time.lua", true))()```'},
+                { name: 'One Punch Man: Destiny', value: '```lua\nshared.key = "free" -- sometimes changed :]\nloadstring(game:HttpGet("https://raw.githubusercontent.com/Donut3339/myscriptxd/master/OPM_Destiny.lua", true))()```'}
             )
             .setTimestamp()
         message.author.send(scriptEmbed);
