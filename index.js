@@ -92,8 +92,8 @@ client.on('ready', () => {
             .setColor('#0099ff')
             .setTitle('Commands')
             .addFields(
-                { name: 'General', value: '`getrole`, `help`'},
-                { name: 'Staff', value: '`cc`, `clearchat`, `setstatus`, `kick`, `ban`, `lock / lockchannel`, `unlock / unlockchannel`'},
+                { name: 'General', value: '`help`'},
+                { name: 'Staff', value: '`cc`, `clearchat`, `setstatus`, `kick`, `ban`'},
             )
             .setTimestamp()
         message.author.send(helpEmbed);
@@ -111,7 +111,7 @@ client.on('ready', () => {
                 { name: 'Speed Run Simulator', value: '```lua\nloadstring(game:HttpGet("https://raw.githubusercontent.com/Donut3339/myscriptxd/master/Speed%20Run%20Simulator.lua", true))()```'},
                 { name: 'King Piece', value: '```lua\nloadstring(game:HttpGet("https://raw.githubusercontent.com/Donut3339/myscriptxd/master/King%20Piece.lua", true))()```'},
                 { name: 'A Universal Time', value: '```lua\nloadstring(game:HttpGet("https://raw.githubusercontent.com/Donut3339/myscriptxd/master/A%20Universal%20Time.lua", true))()```'},
-                { name: 'One Punch Man: Destiny', value: '```lua\nshared.key = "free" -- sometimes changed :]\nloadstring(game:HttpGet("https://raw.githubusercontent.com/Donut3339/myscriptxd/master/OPM_Destiny.lua", true))()```'}
+                { name: 'One Punch Man: Destiny', value: '```lua\nshared.key = "free" -- if not working maybe the site down\nloadstring(game:HttpGet("https://raw.githubusercontent.com/Donut3339/myscriptxd/master/OPM_Destiny.lua", true))()```'}
             )
             .setTimestamp()
         message.author.send(scriptEmbed);
@@ -267,51 +267,7 @@ client.on('ready', () => {
 
         mentionMember.ban(raeson)
             .catch(console.error);
-    })
-
-    command(client, 'verify', (message) => {
-        let channel = message.guild.channels
-        let verifych = channel.cache.some(ch => ch.name === "verify")
-
-        if (verifych) {
-            if (message.member.roles.cache.some(r => r.name === "Verified")) {
-                const embed = new Discord.MessageEmbed()
-                    .setColor('#0099ff')
-                    .setAuthor(message.author.tag, message.author.avatarURL().toString())
-                    .setDescription('You already verify.')
-                    .setTimestamp()
-                message.channel.send(embed)
-                    .then(msg => {
-                        msg.delete({ timeout: 1000 })
-                    })
-                message.author.lastMessage.delete({ timeout: 1000 });
-            } else {
-                message.member.roles.add(message.guild.roles.cache.find(r => r.name === "Verified")).catch(console.error);
-                const embed = new Discord.MessageEmbed()
-                    .setColor('#0099ff')
-                    .setAuthor(message.author.tag, message.author.avatarURL().toString())
-                    .setDescription('Verified')
-                    .setTimestamp()
-                message.channel.send(embed)
-                    .then(msg => {
-                        msg.delete({ timeout: 1000 })
-                    })
-                message.author.lastMessage.delete({ timeout: 1000 });
-            }
-        } else {
-            const embed = new Discord.MessageEmbed()
-                .setColor('#0099ff')
-                .setAuthor(message.author.tag, message.author.avatarURL().toString())
-                .setDescription("Sorry, this commands only on verify channel")
-                .setTimestamp()
-            message.channel.send(embed)
-                .then(msg => {
-                    msg.delete({ timeout: 10000 })
-                })
-            message.author.lastMessage.delete({ timeout: 10000 });
-            return;
-        }
-    })
+    }
 })
 
 client.on('message', message => {
