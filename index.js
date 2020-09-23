@@ -265,9 +265,8 @@ client.on('ready', () => {
             return
         };
 
-        mentionMember.ban(raeson)
-            .catch(console.error);
-    }
+        mentionMember.ban(raeson).catch(console.error);
+    });
 })
 
 client.on('message', message => {
